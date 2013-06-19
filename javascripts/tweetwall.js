@@ -26,7 +26,7 @@
   }
  
   var querytext = 'aiww OR "ai weiwei" OR "aiweiwei" OR "#aiww" OR "freeaiweiwei" OR aiwwenglish OR weiweicam';
-  // var querytext = 'weiweicam';
+  
   if ( typeof realquerytext !== 'undefined' ) {
       querytext = realquerytext;
   } 
@@ -43,12 +43,13 @@
   $(function() {
     tweets = $('#tweets').scroller();
     flicks = $('#flickr').scroller();
-    
+
     function fetchTweets() {
       if(tweets.items.length < 15) {
-        // since_id
+        // since_id    http://search.twitter.com/search.json?callback=?&q=stackoverflow
         var url = 'http://search.twitter.com/search.json?q=' + query + '&rpp=30&callback=?'; 
-        $.getJSON(url, function(data) {
+        //$.getJSON('../twitter-proxy.php?url=' + url, function(data) {
+          $.getJSON('http://landontaylorphoto.com/tweet-wall/get-tweets-search.php' , function(data) {
           $.each(data.results, function() {  
             tweets.push($('<li><img class="profile" src="' + this.profile_image_url + '"/><span class="meta"><span class="from">' + this.from_user + '</span> <span class="created_at">' + fmtDates(this.created_at) + '</span></span>' + inlinePics(this.text) + '</li>'))
            }); 
