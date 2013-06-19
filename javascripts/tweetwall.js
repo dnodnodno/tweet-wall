@@ -46,12 +46,10 @@
 
     function fetchTweets() {
       if(tweets.items.length < 15) {
-        // since_id    http://search.twitter.com/search.json?callback=?&q=stackoverflow
-        var url = 'http://search.twitter.com/search.json?q=' + query + '&rpp=30&callback=?'; 
-        //$.getJSON('../twitter-proxy.php?url=' + url, function(data) {
-          $.getJSON('http://landontaylorphoto.com/tweet-wall/get-tweets-search.php' , function(data) {
-          $.each(data.results, function() {  
-            tweets.push($('<li><img class="profile" src="' + this.profile_image_url + '"/><span class="meta"><span class="from">' + this.from_user + '</span> <span class="created_at">' + fmtDates(this.created_at) + '</span></span>' + inlinePics(this.text) + '</li>'))
+        //var url = 'http://search.twitter.com/search.json?q=' + query + '&rpp=30&callback=?'; 
+          $.getJSON('http://weiweicam/get-tweets-search.php' , function(data) {
+          $.each(data.statuses, function() {  
+            tweets.push($('<li><img class="profile" src="' + this.user.profile_image_url + '"/><span class="meta"><span class="from">' + this.user.screen_name + '</span> <span class="created_at">' + fmtDates(this.created_at) + '</span></span>' + inlinePics(this.text) + '</li>'))
            }); 
          });
       }
